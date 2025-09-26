@@ -89,7 +89,6 @@ def main():
     """
     filter_option = ask_for_filter()
     search_term = ask_for_search_term(filter_option)
-    print(filter_option, search_term)
     do_filter(filter_option, search_term)
 
 

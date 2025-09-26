@@ -1,40 +1,48 @@
 import json
 
+USER_DATA = "users.json"
+
+
+def load_json_data():
+    """Return json data from file."""
+    with open(USER_DATA, "r") as file:
+        users = json.load(file)
+    return users
+
+
+def print_users(users):
+    """Print user information for the given list of users."""
+    for user in users:
+        print(user)
+
 
 def filter_users_by_name(name):
     """Return list of user objects filtered by name."""
-    with open("users.json", "r") as file:
-        users = json.load(file)
-
+    users = load_json_data()
     filtered_users = [user for user in users if user["name"].lower() == name.lower()]
-
-    for user in filtered_users:
-        print(user)
+    print_users(filtered_users)
 
 
 def filter_users_by_age(age):
     """Return list of user objects filtered by age."""
-    with open("users.json", "r") as file:
-        users = json.load(file)
-
+    users = load_json_data()
     filtered_users = [user for user in users if user["age"] == age]
-
-    for user in filtered_users:
-        print(user)
+    print_users(filtered_users)
 
 
 def filter_users_by_email(email):
     """Return list of user objects filtered by name   ."""
-    with open("users.json", "r") as file:
-        users = json.load(file)
-
+    users = load_json_data()
     filtered_users = [user for user in users if user["email"] == email]
 
     for user in filtered_users:
         print(user)
 
 
-if __name__ == "__main__":
+def main():
+    """Show users from a JSON file,
+    with the possibility to filter by different criteria.
+    """
     filter_option = input("What would you like to filter by? ('name', 'age' or 'email'): ").strip().lower()
 
     if filter_option == "name":
@@ -53,3 +61,7 @@ if __name__ == "__main__":
         filter_users_by_email(email_to_search)
     else:
         print("Filtering by that option is not yet supported.")
+
+
+if __name__ == "__main__":
+    main()

@@ -5,7 +5,7 @@ USER_DATA = "users.json"
 
 def load_json_data():
     """Return json data from file."""
-    with open(USER_DATA, "r") as file:
+    with open(USER_DATA, "r", encoding="utf-8") as file:
         users = json.load(file)
     return users
 
@@ -50,10 +50,11 @@ def ask_for_filter():
     filter_options = [f"'{key}'" for key, _ in FILTER_OPTIONS.items()]
     filter_options_str = ", ".join(filter_options)
     while True:
-        filter_option = input(f"What would you like to filter by? ({filter_options_str}): ").strip().lower()
+        filter_option = input(f"What would you like to filter by?"
+                              f" ({filter_options_str}): ").strip().lower()
         if FILTER_OPTIONS.get(filter_option):
             break
-        elif not filter_option:
+        if not filter_option:
             print("Please enter one of the above filter options.")
         else:
             print("Filtering by that option is not yet supported.")
@@ -69,7 +70,7 @@ def ask_for_search_term(filter_option):
         if filter_option == "age" and search_term.isdigit():
             search_term = int(search_term)
             break
-        elif filter_option == "age":
+        if filter_option == "age":
             print("Only whole numbers are allowed for the age filter.")
         else:
             break
